@@ -27,21 +27,24 @@
     </div>
 
     <div id="app"> 
-      <div v-if="showContent">
-        <h3>{{ title }}</h3>
-        <p><strong>{{ author }}</strong>, {{ age }}</p>
-        <button @click="age++">Increase age</button>
-        <button @click="age--">Decrease age</button>
-        <button @click="changeTitle()" style="background: red;">
-          Change title
-        </button>
+      <div v-if="showBooks">
+        <ul>
+          <li v-for="book in books" :key="book.id">
+            {{ item }}
+            <h3>{{ book.title }}</h3>
+            <p><strong>{{ book.author }}</strong></p>
+            Likes: {{ book.likes }}
+            <button @click="book.likes++">Like</button>
+            <button @click="book.likes--">Dislike</button>
+          </li>
+        </ul>
       </div>
 
       <button @click="toggleShowContent">
-        <span v-if="showContent">Hide books</span>
+        <span v-if="showBooks">Hide books</span>
         <span v-else>Show books</span>
       </button>
-      <div v-show="showContent">Displaying books</div>
+      <div v-show="showBooks">Displaying books</div>
 
       <br />
 

@@ -4,12 +4,14 @@ const app = Vue.createApp({
     // root component: data || functions
     data() {
         return {
-            title: 'Catcher in the Rye',
-            author: 'J.D. Salinger',
-            age: '88',
-            showContent: false,
+            showBooks: false,
             x: 0,
-            y: 0
+            y: 0,
+            books: [
+                {id: 1, title: "The Catcher in the Rye", authro: "J.D. Salinger", likes: 0},
+                {id: 2, title: "Conjectures and Refutations", authro: "Karl Popper", likes: 0},
+                {id: 3, title: "Maps of Meaning", authro: "Jordan B. Peterson", likes: 0}
+            ]
         }
     },
     methods: {
@@ -18,7 +20,7 @@ const app = Vue.createApp({
             console.log('changeTitle()');
         },
         toggleShowContent() {
-            this.showContent = !this.showContent
+            this.showBooks = !this.showBooks
         },
         handleEvent(e, data) {
             console.log(e.type)
