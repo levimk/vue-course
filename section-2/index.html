@@ -29,13 +29,22 @@
     <div id="app"> 
       <div v-if="showBooks">
         <ul>
-          <li v-for="book in books" :key="book.id">
-            {{ item }}
-            <h3>{{ book.title }}</h3>
-            <p><strong>{{ book.author }}</strong></p>
-            Likes: {{ book.likes }}
-            <button @click="book.likes++">Like</button>
-            <button @click="book.likes--">Dislike</button>
+          <li v-for="book in books" :key="book.id" style="margin-bottom: 20px;">
+            <div style="display: flex; flex-direction: column; align-items: stretch">
+              <img :src="book.img" :alt="book.title" style="max-width: 200px; height: auto;" />
+
+              <h3>{{ book.title }}</h3>
+              <p><strong>{{ book.author }}</strong></p>
+              
+              <div style="display: flex; flex-direction: column;">
+                <div>Likes: {{ book.likes }}</div>
+                <div style="margin-bottom: 10px;"><a :href="book.url" target="_blank">Buy this book</a></div>
+              </div>
+              <div>
+                <button @click="book.likes++">Like</button>
+                <button @click="book.likes--">Dislike</button>
+              </div>
+            </div>
           </li>
         </ul>
       </div>
