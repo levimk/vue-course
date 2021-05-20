@@ -28,19 +28,21 @@
 
     <div id="app"> 
       <div v-if="showBooks">
-        <ul>
-          <li v-for="book in books" :key="book.id" style="margin-bottom: 20px;">
-            <div style="display: flex; flex-direction: column; align-items: stretch">
-              <img :src="book.img" :alt="book.title" style="max-width: 200px; height: auto;" />
-
-              <h3>{{ book.title }}</h3>
-              <p><strong>{{ book.author }}</strong></p>
-              
-              <div style="display: flex; flex-direction: column;">
+        <ul class="books">
+          <li
+            v-for="book in books"
+            :key="book.id"
+            style="margin-bottom: 20px;"
+            :class="{ fav: book.isFav }">
+            <div class="book container">
+              <img class="book" :src="book.img" :alt="book.title" style="max-width: 200px; height: auto;" />
+              <div class="book info" style="display: flex; flex-direction: column;">
+                <h3 class="book">{{ book.title }}</h3>
+                <p class="book author"><strong>{{ book.author }}</strong></p>
                 <div>Likes: {{ book.likes }}</div>
                 <div style="margin-bottom: 10px;"><a :href="book.url" target="_blank">Buy this book</a></div>
               </div>
-              <div>
+              <div class="book buttons">
                 <button @click="book.likes++">Like</button>
                 <button @click="book.likes--">Dislike</button>
               </div>
