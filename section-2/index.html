@@ -45,6 +45,10 @@
               <div class="book buttons">
                 <button @click="book.likes++">Like</button>
                 <button @click="book.likes--">Dislike</button>
+                <button @click="toggleFav(book)">
+                  <span v-if="book.isFav">Unfav</span>
+                  <span v-else>Add to favs</span>
+                </button>
               </div>
             </div>
           </li>

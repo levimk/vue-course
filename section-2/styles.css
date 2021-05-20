@@ -23,32 +23,36 @@ button {
   display: inline-block;
 }
 
-div.book.container {
-  max-width: 300px;
-  padding: 10px;
-}
-
 ul.books {
   padding-right: 20px;
   list-style-type: none;
   padding-left: 0;
 }
 
-h3.book {
-  margin-bottom: 5px;
+ul.books > li {
+  width: 100%;
 }
 
+/* h3.book {
+  margin-bottom: -5px;
+} */
+
 p.book.author {
-  margin-top: 0px;
+  margin-top: -40px;
 }
 
 div.book.container {
-  padding-top: 20px;
+  width: 100%;
+  padding: 20px 10px 20px 10px;
   background-color: beige;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+.book.container img {
+  max-height: 200px;
 }
 
 div.book.info {
@@ -59,14 +63,16 @@ div.book.info {
 }
 
 div.book.buttons {
-  align-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .fav div.book.container {
-  background-color: darksalmon;
+  background-color: rgb(255, 182, 237);
   border-style: solid;
   border-width: 2px;
   border-color: hotpink;
   border-radius: 5px;
-  color: white;
+  color: black;
 }
