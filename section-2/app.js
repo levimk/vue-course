@@ -7,7 +7,9 @@ const app = Vue.createApp({
             title: 'Catcher in the Rye',
             author: 'J.D. Salinger',
             age: '88',
-            showContent: false
+            showContent: false,
+            x: 0,
+            y: 0
         }
     },
     methods: {
@@ -17,6 +19,16 @@ const app = Vue.createApp({
         },
         toggleShowContent() {
             this.showContent = !this.showContent
+        },
+        handleEvent(e, data) {
+            console.log(e.type)
+            if (data) {
+                console.log("data:", data)
+            }
+        },
+        handleMousemove(e) {
+            this.x = e.offsetX
+            this.y = e.offsetY
         }
     }
 })

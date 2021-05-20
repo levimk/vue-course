@@ -36,11 +36,19 @@
           Change title
         </button>
       </div>
+
       <button @click="toggleShowContent">
         <span v-if="showContent">Hide books</span>
-        <span v-else">Show books</span>
+        <span v-else>Show books</span>
       </button>
-      <div v-show="showContent">Displaying boooks</div>
+      <div v-show="showContent">Displaying books</div>
+
+      <br />
+
+      <div class="box" @mouseover="handleEvent($event, 5)">mouseover</div>
+      <div class="box" @mouseleave="handleEvent">mouseleave</div>
+      <div class="box" @dblclick="handleEvent">doubleclick</div>
+      <div class="box" @mousemove="handleMousemove">Mouse position: {{ x }}, {{ y }}</div>
     </div>
 
     <script src="app.js" async defer></script>
