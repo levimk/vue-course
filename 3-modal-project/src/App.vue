@@ -1,5 +1,8 @@
 <template>
-  <Modal />
+  <Modal
+    :header="header"
+    :text="text"
+    theme="sale"/>
   <div class="headline">
     <h1>{{ title }}</h1>
     <input type="text" ref="name">
@@ -14,7 +17,9 @@ export default {
   name: 'App',
   data () {
     return {
-      title: 'My first Vue app!'
+      title: 'My first Vue app!',
+      header: "Become a Vue ninja",
+      text: "Sign up today for a 50% discount. 48 hours only!"
     }
   },
   methods: {
