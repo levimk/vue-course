@@ -3,28 +3,40 @@
   <div class="buttons">
     <button class="start" @click="start" :disabled='isPlaying'>Start game</button>
   </div>
-  <Block v-if='isPlaying' message="Click me!" :delay='delay'/>
+  <Block v-if='isPlaying' message="Click me!" :delay='delay' @end='endGame'/>
+  <Results v-if='showResults' :score='score'/>
 </template>
 
 <script>
 import Block from './components/Block'
+import Results from './components/Results'
 
 export default {
   name: 'App',
   components: {
-    Block
+    Block,
+    Results
   },
   methods: {
     start() {
       this.delay = 2000 + Math.random() * 5000
       this.isPlaying = true
       console.log("Delay: ", this.delay)
+      this.showResults = false
+    },
+    endGame(reactionTime) {
+      console.log(reactionTime)
+      this.score = reactionTime
+      this.isPlaying = false
+      this.showResults = true
     }
   },
   data() {
     return {
       isPlaying: false,
-      delay: 0
+      delay: 0,
+      score: null,
+      showResults: false
     }
   }
 }
