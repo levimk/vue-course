@@ -1,0 +1,22 @@
+{
+  "projects": [
+    {
+      "title": "NEW PROJECT",
+      "details": "LOREM",
+      "complete": true,
+      "id": 1
+    },
+    {
+      "title": "c,jb",
+      "details": "kh",
+      "complete": false,
+      "id": 2
+    },
+    {
+      "title": ",jhgf",
+      "details": "khgjfhdg",
+      "complete": true,
+      "id": 3
+    }
+  ]
+}

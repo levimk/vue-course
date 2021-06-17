@@ -1,0 +1,24 @@
+{
+  "jobs": [
+    {
+      "title": "Ninja UX Designer",
+      "id": 1,
+      "details": "lorem"
+    },
+    {
+      "title": "Ninja Web Developer",
+      "id": 3,
+      "details": "lorem"
+    },
+    {
+      "title": "Ninja Product Manager",
+      "id": 2,
+      "details": "lorem"
+    },
+    {
+      "title": "Ninja Entrepreneur",
+      "details": "lorem",
+      "id": 4
+    }
+  ]
+}
