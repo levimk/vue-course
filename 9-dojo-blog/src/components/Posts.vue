@@ -14,11 +14,13 @@ export default {
   components: {
       SinglePost
       },
-  setup(props) {
-      return {
-          posts: props.posts
-      }
-  }
+//   setup(props) {
+//       console.log("PostList")
+//       console.log(props.posts)
+//       return {
+//           posts: props.posts
+//       }
+//   }
 }
 </script>
 

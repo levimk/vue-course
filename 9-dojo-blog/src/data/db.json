@@ -19,6 +19,25 @@
         "webdev",
         "coding"
       ]
+    },
+    {
+      "title": "Ninja Blog",
+      "body": "lorem ipsum NINJA",
+      "tags": [
+        "ninja",
+        "katana"
+      ],
+      "id": 3
+    },
+    {
+      "title": "Routing x Composition API",
+      "body": "import { useRouter } from 'vue-router'\nsetup() { const router = useRouter() }",
+      "tags": [
+        "router",
+        "compositionapi",
+        "routes"
+      ],
+      "id": 4
     }
   ]
 }
