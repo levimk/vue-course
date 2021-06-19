@@ -1,22 +1,26 @@
 <template>
-  <div v-for="post in posts">
-      <h3>{{ post.title }}</h3>
-      <p>{{ post.details }}</p>
+  <div class="post-list">
+    <div v-for="post in posts" :key="post.id">
+      <SinglePost :post="post" />
+    </div>
   </div>
-  <button @click="posts.pop()">Remove post</button>
 </template>
 
 <script>
-import { ref } from 'vue'
+// component imports
+import SinglePost from './SinglePost.vue'
 export default {
-    props: ['posts'],
-    setup(props) {
-        const posts = ref(props.posts)
-        return { posts }
-    }
+  props: ['posts'],
+  components: {
+      SinglePost
+      },
+  setup(props) {
+      return {
+          posts: props.posts
+      }
+  }
 }
 </script>
 
 <style>
-
 </style>
