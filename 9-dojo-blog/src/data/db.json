@@ -38,6 +38,38 @@
         "routes"
       ],
       "id": 4
+    },
+    {
+      "title": "Donald Trump",
+      "body": "lkjhkjhjkh",
+      "tags": [
+        "politics",
+        "news",
+        "trump"
+      ],
+      "id": 5
+    },
+    {
+      "title": "Hilary Clinton",
+      "body": "kjbjkb",
+      "tags": [
+        "news",
+        "conspiracy",
+        "politics",
+        "democrats"
+      ],
+      "id": 6
+    },
+    {
+      "title": "Geoffrey Epstein",
+      "body": "kjjhgjhg",
+      "tags": [
+        "bio",
+        "conspiracy",
+        "news",
+        "celebrity"
+      ],
+      "id": 7
     }
   ]
 }

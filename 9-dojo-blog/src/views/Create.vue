@@ -1,5 +1,4 @@
 <template>
-    <h2>Create new post</h2>
     <div class="create">
         <form @submit.prevent="handleSubmit">
             <label>Title</label>
@@ -31,7 +30,7 @@
 </template>
 
 <script>
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 export default {
     setup() {
@@ -40,16 +39,6 @@ export default {
       const body = ref('')
       const tag = ref('')
       const tags = ref([])
-
-      watch(title, () => {
-          console.log(title.value)
-      })
-      watch(body, () => {
-          console.log(body.value)
-      })
-      watch(tag, () => {
-          console.log(tag.value)
-      })
 
       const addTag = () => {
           tag.value = tag.value.replace(/\s/, '') // remove whitspace

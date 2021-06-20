@@ -1,9 +1,8 @@
 <template>
   <div class="home">
-    <h1>Home</h1>
-    <h2>Posts</h2>
-    <div v-if="posts.length">
+    <div class="layout" v-if="posts.length">
       <Posts :posts="posts" />
+      <TagCloud :posts="posts"/>
     </div>
     
     <div v-else>
@@ -19,14 +18,12 @@
 // @ is an alias to /src
 import Posts from '@/components/Posts'
 import Spinner from '@/components/Spinner'
+import TagCloud from '@/components/TagCloud'
 import getPosts from '@/composables/getPosts'
 
 export default {
   name: 'Home',
-  components: {
-    Posts,
-    Spinner
-  },
+  components: { Posts, Spinner, TagCloud },
   setup() {
     const { posts, error, load } = getPosts()
 
@@ -45,5 +42,10 @@ export default {
     max-width: 1200px;
     margin: 0 auto;
     padding: 10px;
+  }
+  .layout {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 20px;
   }
 </style>

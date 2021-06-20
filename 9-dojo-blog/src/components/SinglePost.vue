@@ -7,13 +7,18 @@
     </router-link>
     <p>{{ snippet }}</p>
     <div class="tags">
-        <span class="tag" v-for="tag in post.tags" :key="tag">#{{ tag }}</span>
+        <span class="tag" v-for="tag in post.tags" :key="tag">
+          <router-link :to="{ name: 'Tag', params: { tag }}">
+            #{{ tag }}
+          </router-link>
+        </span>
     </div>
   </div>
 </template>
 
 <script>
 import { computed } from 'vue'
+
 export default {
   props: ['post'],
   setup(props) {
@@ -64,6 +69,18 @@ export default {
 
 .tag {
     margin: 5px;
+}
+
+.tag a {
+  text-decoration: none;
+  color: #ff88008c;
+}
+
+.tag a:hover {
+  /* color: #ff8800; */
+  color: white;
+  background: #ff8800;
+  padding: 0 5px;
 }
 
 </style>
