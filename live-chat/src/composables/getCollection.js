@@ -1,4 +1,4 @@
-import { ref } from "vue";
+import { ref, watchEffect } from "vue";
 import { projectFirestore } from "../firebase/config";
 
 const getCollection = collection => {
@@ -10,7 +10,7 @@ const getCollection = collection => {
     .collection(collection)
     .orderBy("createdAt");
 
-  collectionRef.onSnapshot(
+  const unsubscribe = collectionRef.onSnapshot(
     snap => {
       let results = [];
       snap.docs.forEach(doc => {
@@ -28,6 +28,8 @@ const getCollection = collection => {
       error.value = "could not fetch the data";
     }
   );
+
+  watchEffect(onInvalidate => onInvalidate(() => unsubscribe()));
 
   return { error, documents };
 };
