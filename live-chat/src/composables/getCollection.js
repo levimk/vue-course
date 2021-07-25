@@ -6,7 +6,9 @@ const getCollection = collection => {
   const error = ref(null);
 
   // register the firestore collection reference
-  let collectionRef = projectFirestore.collection(collection);
+  let collectionRef = projectFirestore
+    .collection(collection)
+    .orderBy("createdAt");
 
   collectionRef.onSnapshot(
     snap => {
@@ -20,17 +22,12 @@ const getCollection = collection => {
       // update values
       documents.value = results;
       error.value = null;
-      console.log(results);
     },
     err => {
-      console.log(err.message);
       documents.value = null;
       error.value = "could not fetch the data";
     }
   );
-
-  console.log("useCollection");
-  console.log(documents.value);
 
   return { error, documents };
 };
