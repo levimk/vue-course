@@ -13,11 +13,22 @@ const requireAuth = (to, from, next) => {
   }
 };
 
+// user logged in guard: auto-redirect from / to chat room
+const userLoggedIn = (to, from, next) => {
+  let user = projectAuth.currentUser;
+  if (user) {
+    next({ name: "ChatRoom" });
+  } else {
+    next();
+  }
+};
+
 const routes = [
   {
     path: "/",
     name: "Welcome",
-    component: Welcome
+    component: Welcome,
+    beforeEnter: userLoggedIn
   },
   {
     path: "/chatroom",
