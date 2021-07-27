@@ -8,13 +8,55 @@
                 </router-link>
             </h1>
             <div class="links">
-                <button>Logout</button>
-                <router-link class="btn" :to="{name: 'Signup'}">Signup</router-link>
-                <router-link class="btn" :to="{name: 'Login'}">Login</router-link>
+              <div v-if="user">
+                <button
+                  type="button"
+                  @click="handleLogout"
+                  :disabled="pendingLogout ? null : true"
+                  >Log out</button>
+              </div>
+              <div v-else>
+                <router-link
+                  class="btn" 
+                  :to="{name: 'Signup'}">Sign up</router-link>
+                <router-link
+                  class="btn"
+                  :to="{name: 'Login'}">Log in</router-link>
+              </div>
             </div>
         </nav>
     </div>
 </template>
+<script>
+import { useRouter } from 'vue-router'
+import { ref, watch } from 'vue'
+import useLogout from '@/composables/useLogout'
+import getUser from '@/composables/getUser'
+
+export default {
+  setup() {
+    const router = useRouter()
+    const { error, logout } = useLogout()
+    const { user } = getUser()
+    const pendingLogout = ref('false')
+
+    const handleLogout = async () => {
+      await logout()
+      if (!error.value) {
+        router.push({ name: 'Login' })
+      } else {
+        console.log('Log out error:', error.value)
+      }
+    }
+
+    return{
+      handleLogout,
+      pendingLogout,
+      user
+    }
+  }
+}
+</script>
 <style scoped>
   .navbar {
     padding: 16px 10px;
