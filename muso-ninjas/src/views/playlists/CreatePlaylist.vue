@@ -13,22 +13,49 @@
         <label>Upload playlist cover image</label>
         <input type="file" @change="handleFileChange"/>
         <div v-if="fileError" class="error">{{fileError}}</div>
-        <button>Create</button>
+        <button v-if="!isPending">Create</button>
+        <button v-else disabled>Saving...</button>
     </form>
 </template>
+
 <script>
 import { ref } from '@vue/reactivity'
+import useStorage from '@/composables/useStorage'
+import useCollection from '@/composables/useCollection'
+import getUser from '@/composables/getUser'
+import { timestamp } from '@/firebase/config'
+
 export default {
     setup() {
+        const { url, storageError, filePath, uploadImage } = useStorage()
+        const { error, addDoc } = useCollection('playlists')
+        const { user } = getUser()
+
         const title = ref('')
         const description = ref('')
         const file = ref(null)
         const fileError = ref(null)
+
+        const isPending = ref(false)
         
-        
-        const handleSubmit = () => {
+        const handleSubmit = async () => {
             if (file.value && !fileError.value) {
-                console.log(title.value, description.value, file.value)
+                isPending.value = true
+                await uploadImage(file.value)
+                await addDoc({
+                    title: title.value,
+                    description: description.value,
+                    userId: user.value.uid,
+                    username: user.value.displayName,
+                    coverUrl: url.value,
+                    filePath: filePath.value,
+                    songs: [],
+                    createdAt: timestamp()
+                })
+                isPending.value = false
+                if (!error.value) {
+                    console.log('Playlist added')
+                }
             }
         }
 
@@ -47,7 +74,7 @@ export default {
             }
         }
 
-        return { title, description, fileError, handleSubmit, handleFileChange }
+        return { title, description, isPending, fileError, handleSubmit, handleFileChange }
     }
 }
 </script>
