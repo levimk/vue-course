@@ -9,6 +9,9 @@
             </h1>
             <div class="links">
               <div v-if="user">
+                <router-link :to="{name: 'CreatePlaylist'}">
+                  Create playlist
+                </router-link>
                 <button
                   type="button"
                   @click="handleLogout"
