@@ -32,7 +32,7 @@ const useStorage = () => {
       return res;
     } catch (err) {
       console.log(err.message);
-      error.value = err.message;
+      storageError.value = err.message;
     }
   }
 
