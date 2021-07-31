@@ -14,7 +14,19 @@
         </div>
 
         <div class="song-list">
-            songs
+            <div v-if="!playlist.songs.length">
+                No songs in {{playlist.title}} playlist yet
+            </div>
+            <div v-else class="single-song" v-for="song in playlist.songs" :key="song.id"> 
+                <div class="details">
+                    <h3>{{song.title}}</h3>
+                    <p>{{song.artist}}</p>
+                </div>
+                <button v-if="ownership" type="button" @click="handleDeleteSong(song.id)">Delete</button>
+            </div>
+            <AddSong
+                v-if="ownership"
+                :playlist="playlist"/>
         </div>
     </div>
 </template>
@@ -25,13 +37,17 @@ import useStorage from '@/composables/useStorage'
 import getUser from '@/composables/getUser'
 import { computed } from '@vue/runtime-core'
 import { useRouter } from 'vue-router'
+import AddSong from '@/components/AddSong'
 
 export default {
     props: ['id'],
+    components: {
+        AddSong
+    },
     setup(props) {
         const { error, document: playlist } = getDocument('playlists', props.id)
         const { user } = getUser()
-        const { deleteDoc: deletePlaylist } = useDocument('playlists', props.id)
+        const { deleteDoc: deletePlaylist, updateDoc: updatePlaylist } = useDocument('playlists', props.id)
         const { deleteImage } = useStorage()
         const router = useRouter()
 
@@ -45,7 +61,13 @@ export default {
             router.push({ name: 'Home' })
         }
 
-        return { error, playlist, handleDelete, ownership, deletePlaylist }
+        const handleDeleteSong = async (id) => {
+            await updatePlaylist({
+                songs: playlist.value.songs.filter(song => song.id != id)
+            })
+        }
+
+        return { error, playlist, handleDelete, handleDeleteSong, ownership }
     }
     
 }
@@ -88,5 +110,13 @@ export default {
   }
   .description {
     text-align: left;
+  }
+  .single-song {
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px dashed var(--secondary);
+    margin-bottom: 20px;
   }
 </style>
