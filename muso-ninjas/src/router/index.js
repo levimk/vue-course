@@ -1,20 +1,22 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../views/Home.vue';
+import NotFound from '../views/NotFound.vue';
 import Login from '../views/auth/Login.vue';
 import Signup from '../views/auth/Signup.vue';
 import CreatePlaylist from '../views/playlists/CreatePlaylist.vue';
 import PlaylistDetails from '../views/playlists/PlaylistDetails.vue';
+import UserPlaylists from '../views/playlists/UserPlaylists.vue';
 
 import { projectAuth } from '@/firebase/config';
 
 const requireAuth = (to, from, next) => {
   let user = projectAuth.currentUser;
   if (!user) {
-    next({ name: 'Login' })
+    next({ name: 'Login' });
   } else {
-    next()
+    next();
   }
-}
+};
 
 const routes = [
   {
@@ -46,6 +48,17 @@ const routes = [
     beforeEnter: requireAuth,
     props: true
   },
+  {
+    path: '/playlists/user',
+    name: 'UserPlaylists',
+    component: UserPlaylists,
+    beforeEnter: requireAuth,
+  },
+  {
+    path: '/:catchAll(.*)',
+    name: 'NotFound',
+    component: NotFound
+  }
 ];
 
 const router = createRouter({
